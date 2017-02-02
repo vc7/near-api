@@ -11,14 +11,12 @@ module API
 					latitude = 35.736253
 
 					nearby_stations = StationService.find_nearing_stations latitude, longitude
+					city = CityService.find_current_city(latitude, longitude)
+					temperature = WeatherService.find_weather_information(city[:prefecture] + city[:name])
 
 					{
-						:name => "豊島区",
-						:temperature => {
-							:current => 10,
-							:high => 13,
-							:low => 1,
-						},
+						:city => city,
+						:temperature => temperature,
 						:nearby_stations => nearby_stations
 					}
 				end
