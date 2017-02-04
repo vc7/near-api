@@ -4,8 +4,6 @@ module API
 			resource :location do
 				desc 'Return Location Info.'
 				get do
-					# params[:ll]
-					# 從 params 取得經緯度之後，個別產出 temperature 和附近車站
 
 					longitude = params['longitude']
 					latitude = params['latitude']
