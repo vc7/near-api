@@ -49,3 +49,4 @@ gem 'figaro'
 gem 'pg'
 gem 'grape'
 gem 'httparty'
+gem 'rails_12factor', group: :production

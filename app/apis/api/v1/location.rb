@@ -7,12 +7,16 @@ module API
 					# params[:ll]
 					# 從 params 取得經緯度之後，個別產出 temperature 和附近車站
 
-					longitude = 139.6983441
-					latitude = 35.736253
+					longitude = params['longitude']
+					latitude = params['latitude']
 
-					nearby_stations = StationService.find_nearing_stations latitude, longitude
+					if !latitude && !longitude
+						return []
+					end
+
+					nearby_stations = StationService.find_nearing_stations(latitude, longitude)
 					city = CityService.find_current_city(latitude, longitude)
-					temperature = WeatherService.find_weather_information(city[:prefecture] + city[:name])
+					temperature = WeatherService.find_weather_information("#{city[:prefecture]}#{city[:name]}")
 
 					{
 						:city => city,
