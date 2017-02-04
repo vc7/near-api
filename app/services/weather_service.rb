@@ -7,14 +7,21 @@ class WeatherService
     parameters = { :query => { :q => "select item from weather.forecast where woeid in (select woeid from geo.places(1) where text='#{name}') and u='c'", :format => "json"} }
     response = self.get("/", parameters).parsed_response
 
-    temperature_current = response['query']['results']['channel']['item']['condition']['temp']
-    temperature_high = response['query']['results']['channel']['item']['forecast'].first['high']
-    temperature_low = response['query']['results']['channel']['item']['forecast'].first['low']
+    begin
+      item = response['query']['results']['channel']['item']
 
-    result = {
-      :current => temperature_current,
-      :high => temperature_high,
-      :low => temperature_low
-    }
+      temperature_current = item['condition']['temp']
+      temperature_high = item['forecast'][0]['high']
+      temperature_low = item['forecast'][0]['low']
+
+      {
+        :current => temperature_current,
+        :high => temperature_high,
+        :low => temperature_low
+      }
+    rescue => e
+      {}
+    end
+    
   end
 end

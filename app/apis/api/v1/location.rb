@@ -16,7 +16,11 @@ module API
 
 					nearby_stations = StationService.find_nearing_stations(latitude, longitude)
 					city = CityService.find_current_city(latitude, longitude)
-					temperature = WeatherService.find_weather_information("#{city[:prefecture]}#{city[:name]}")
+					temperature = {}
+
+					if city 
+						temperature = WeatherService.find_weather_information("#{city[:prefecture]}#{city[:name]}")
+					end
 
 					{
 						:city => city,
