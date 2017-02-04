@@ -5,6 +5,7 @@ module API
 			format :json
 
 			mount API::V1::Location
+      mount API::V1::Photos
 		end
 	end
 end
