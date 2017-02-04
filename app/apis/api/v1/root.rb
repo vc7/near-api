@@ -6,6 +6,7 @@ module API
 
 			mount API::V1::Location
       mount API::V1::Photos
+      mount API::V1::Spots
 		end
 	end
 end
