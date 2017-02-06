@@ -35,7 +35,7 @@ class SpotService
       spot = {
         :id => raw_spot['id'],
         :name => raw_spot['name'],
-        :location => {
+        :access => {
           :latitude => raw_spot['location']['lat'],
           :longitude => raw_spot['location']['lng'],
           :distance => raw_spot['location']['distance'],
